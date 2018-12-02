@@ -3,7 +3,8 @@ const _ = require('lodash')
 const {GraphQLObjectType, 
        GraphQLString, 
        GraphQLSchema, 
-       GraphQLID} = graphql;
+       GraphQLID, 
+       GraphQLInt } = graphql;
 
 //dummy data
 var books = [
@@ -12,7 +13,21 @@ var books = [
      { name: 'The Long Earth', genre: 'Sci-Fi', id: '3' } 
 ];
 
+var authors = [
+    { name: 'Patrick', age: 44, id: '1' },
+    { name: 'Brandon', age: 44, id: '2' },
+    { name: 'Terry Pratchett', age: 44, id: '3' } 
+];
 
+
+const AuthorType = new GraphQLObjectType({
+    name: 'Author',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        age: { type: GraphQLInt }
+    })
+})
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
@@ -31,6 +46,13 @@ const RootQuery = new GraphQLObjectType({
             args: {id: { type: GraphQLID }},
             resolve( parent, args){
               return _.find(books, { id: args.id }) 
+            }
+        },
+        author: {
+            type: AuthorType,
+            args: {id: { type: GraphQLID }},
+            resolve( parent, args){
+              return _.find(authors, { id: args.id }) 
             }
         }
     }
