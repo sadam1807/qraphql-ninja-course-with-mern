@@ -1,13 +1,17 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./server/schema/schema');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+ const cors = require('cors');
 const  app = express();
+
+app.use(cors());
 
 mongoose.connect('mongodb://sadam:sadam1234@ds143070.mlab.com:43070/gql-ninja', {useNewUrlParser:true})
 mongoose.connection.once('open', () =>{
     console.log('connected to db');
 });
+
 app.use('/graphql',graphqlHTTP ({
     schema,
     graphiql: true
