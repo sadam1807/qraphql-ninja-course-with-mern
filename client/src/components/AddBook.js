@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
-import {gql} from 'apollo-boost';
 import { graphql } from 'react-apollo';
+import {getAuthorsQuery} from '../queries/queries'
 
-const getAuthorsQuery = gql`
-{
-  authors{
-    name
-    id
-  }
-}
-`
 
 class AddBook extends Component {
     displayAuthors(){
         var data = this.props.data;
         if(data.loading){
           return (
-             <option disabled>Loading Books....</option>
+             <option disabled>Loading Authors....</option>
           )
         }
         else {
