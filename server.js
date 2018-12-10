@@ -11,6 +11,7 @@ mongoose.connect('mongodb://sadam:sadam1234@ds143070.mlab.com:43070/gql-ninja', 
 mongoose.connection.once('open', () =>{
     console.log('connected to db');
 });
+mongoose.set('useFindAndModify', false);
 
 app.use('/graphql',graphqlHTTP ({
     schema,
