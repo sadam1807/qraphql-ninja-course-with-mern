@@ -1,6 +1,6 @@
 Graphql-Ninja-Course
 
-Repositaty is created using GraphQL tutorial playlist on The Net Ninja YouTube channel with some modification.
+Repository is created using GraphQL tutorial playlist on The Net Ninja YouTube channel with some modification.
 
 Run following commands to start the app  :
 1) git clone https://github.com/sadam1807/qraphql-ninja-course-with-mern.git
