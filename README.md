@@ -11,6 +11,6 @@ Run following commands to start the app  :
 
 4) npm install
 
-5) cd..
+5) cd ..
 
 6) npm run dev
