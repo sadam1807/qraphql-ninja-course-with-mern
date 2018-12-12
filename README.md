@@ -1,4 +1,4 @@
-Graphql-Ninja-Course
+# Graphql-Ninja-Course
 
 Repository is created using GraphQL tutorial playlist on The Net Ninja YouTube channel with some modification.
 
