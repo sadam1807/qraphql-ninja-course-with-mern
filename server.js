@@ -13,7 +13,7 @@ mongoose.connection.once('open', () =>{
 });
 mongoose.set('useFindAndModify', false);
 
-app.use('/graphql',graphqlHTTP ({
+app.use('/api',graphqlHTTP ({
     schema,
     graphiql: true
 }));

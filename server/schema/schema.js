@@ -2,7 +2,8 @@ const graphql = require('graphql');
 const _ = require('lodash');
 const Book = require('../models/book.js');
 const Author = require('../models/author.js');
-
+const User = require('../models/user.js');
+var bcrypt = require('bcryptjs');
 
 const {GraphQLObjectType, 
        GraphQLString, 
@@ -29,12 +30,23 @@ const AuthorType = new GraphQLObjectType({
     })
 })
 
+const UserType = new GraphQLObjectType({
+    name: 'User',
+    fields: () => ({
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        password: { type: GraphQLString },
+        email: {type: GraphQLString}
+    })
+})
+
 const BookType = new GraphQLObjectType({
     name: 'Book',
     fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         genre: { type: GraphQLString },
+        authorId: {type: GraphQLID},
         author: {
             type: AuthorType,
             resolve(parent, args){
@@ -97,6 +109,23 @@ const Mutation = new GraphQLObjectType({
                     age:args.age
                 })
                 return author.save();
+            }
+        },
+        addUser: {
+            type: UserType,
+            args:{
+                name: { type: new GraphQLNonNull(GraphQLString)},
+                email: { type: new GraphQLNonNull(GraphQLString)},
+                password: { type: new GraphQLNonNull(GraphQLString)},
+            },
+            resolve(parent, args){
+                var hashedPassword = bcrypt.hashSync(args.password, bcrypt.genSaltSync(10));
+                let user= new User({
+                    name: args.name,
+                    email:args.email,
+                    password:hashedPassword
+                })
+                return user.save();
             }
         },
         addBook: {
